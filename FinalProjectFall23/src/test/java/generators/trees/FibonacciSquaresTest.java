@@ -12,8 +12,12 @@ import static org.junit.Assert.assertTrue;
 public class FibonacciSquaresTest {
 
     @Test
-    public void invalidInp(){
+    public void treeInitialised(){
 
-        assertTrue(true);
+        FibonacciSquares test = new FibonacciSquares();
+        test.generateSquares(2);
+        test.getVal();
+//        assertEquals(test.treeRoot.getVal(),"[1,1,2,3]");
+        System.out.println("Expected: [1,1,2,3]   Recieved:"+test.treeRoot.getVal());
     }
 }
