@@ -57,6 +57,6 @@ public class Node {
     }
 
     public void printVal(){
-        System.out.println(this.getVal());
+        System.out.print(this.getVal());
     }
 }

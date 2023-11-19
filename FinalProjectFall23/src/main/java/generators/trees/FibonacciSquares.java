@@ -45,9 +45,9 @@ public class FibonacciSquares {
             newNode.setRight(null);
         }
         else {
-            newNode.setLeft(genSubtree(v,u,n-1));
-            newNode.setMid(genSubtree(v,u,n-1));
-            newNode.setRight(genSubtree(v,u,n-1));
+            newNode.setLeft(genSubtree(2*u+v,u,n-1));
+            newNode.setMid(genSubtree(2*v+u,v,n-1));
+            newNode.setRight(genSubtree(2*v-u,v,n-1));
         }
         return newNode;
     }
@@ -55,17 +55,19 @@ public class FibonacciSquares {
     public void printTree(Node node){
 
         if (node == null) return;
-        else{
-            System.out.print(node.getVal()+"\n");
-            printTree(node.getLeft());
-            printTree(node.getMid());
-            printTree(node.getRight());
 
-        }
+        if(node.getLeft() == null) return;
+        System.out.print(node.getLeft().getVal());
+        System.out.print(node.getMid().getVal());
+        System.out.println(node.getRight().getVal());
+        printTree(node.getLeft());
+        printTree(node.getMid());
+        printTree(node.getRight());
 
     }
 
     public void getVal(){
+        System.out.println(this.treeRoot.getVal());
         printTree(this.treeRoot);
     }
 }
