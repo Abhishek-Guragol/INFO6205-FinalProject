@@ -2,8 +2,6 @@ package generators.trees;
 
 import utils.Node;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class FibonacciSquares {
 
@@ -29,15 +27,15 @@ public class FibonacciSquares {
         return getTreeRoot();
     }
 
-    public Node genNode(int v, int u){
+    public Node genNode(int v, int u,int l){
         Node n = new Node();
-        n.setNode(v,u,null,null,null);
+        n.setNode(v,u,null,null,null,l);
         return n;
     }
 
     public Node genSubtree(int v, int u , int n){
 
-        Node newNode = genNode(v,u);
+        Node newNode = genNode(v,u,n);
         if(n == 0) {
 
             newNode.setLeft(null);
@@ -57,9 +55,9 @@ public class FibonacciSquares {
         if (node == null) return;
 
         if(node.getLeft() == null) return;
-        System.out.print(node.getLeft().getVal());
-        System.out.print(node.getMid().getVal());
-        System.out.println(node.getRight().getVal());
+        System.out.print(node.getLeft().getVal()+ node.level);
+        System.out.print(node.getMid().getVal()+ node.level);
+        System.out.println(node.getRight().getVal()+ node.level);
         printTree(node.getLeft());
         printTree(node.getMid());
         printTree(node.getRight());

@@ -15,23 +15,23 @@ public class PythagoreanTriples {
 
         FibonacciSquares fib = new FibonacciSquares();
         Node tree = fib.generateSquares(n);
-        printTree(tree);
+        printTriples(tree);
        
         return res;
     }
 
-    public void printTree(Node tree){
+    public void printTriples(Node tree){
         if (tree == null) return ;
-        res = res + "["+(String.join(",",genNodeTriple(tree).
+        res = res + "{"+(String.join(",",genNodeTriple(tree).
                                                     stream().
                                                     map(String::valueOf).
-                                                    collect(Collectors.joining(","))))+"]";
+                                                    collect(Collectors.joining(","))))+"}";
         
 
         if(tree.getLeft() == null) return ;
-        printTree(tree.getLeft());
-        printTree(tree.getMid());
-        printTree(tree.getRight());
+        printTriples(tree.getLeft());
+        printTriples(tree.getMid());
+        printTriples(tree.getRight());
         
     }
 
