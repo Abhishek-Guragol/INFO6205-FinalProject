@@ -49,7 +49,7 @@ public class Node {
 
     public String getVal() {
 
-        return ("["+(this.v-this.u)+","+this.u+","+this.v+","+(this.v+this.u)+"]");
+        return ("["+(this.v-this.u)+","+this.u+","+this.v+","+(this.v+this.u)+"], ");
     }
 
     public void setVal(int v, int u) {
