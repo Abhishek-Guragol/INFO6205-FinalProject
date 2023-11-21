@@ -5,7 +5,7 @@ import java.util.List;
 public class Node {
 
 //    Value of that particular node
-    private int v,u;
+    public int v,u;
 //    Three nodes representing the three branches of the tree
     public Node left;
     public Node mid;
