@@ -1,5 +1,8 @@
 package generators.trees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import utils.Node;
 
 
@@ -11,7 +14,7 @@ public class RationalPairs {
 
         FibonacciSquares fib = new FibonacciSquares();
         Node tree = fib.generateSquares(n);
-        printPairs(tree);
+        rationalBFS(tree);
        
         return res;
 
@@ -28,12 +31,22 @@ public class RationalPairs {
         printPairs(tree.getRight());
     }
 
-    // public List<Integer> genNodePairs(Node n){
-    //     List<Integer> triples = new ArrayList<>();
+    public void rationalBFS(Node tree){
 
-    //     triples.add( (n.v*n.v )- (n.u*n.u)); //V^2-U^2
-    //     triples.add( 2*n.u*n.v);
-    //     triples.add(  n.u*(n.v+n.u)+n.v*(n.v-n.u));  //(U*(v+u))+(V*(V-U))
-    //     return triples;
-    // }
+        res = "";
+        if(tree == null) return ;
+        List<Node> queue = new ArrayList<>();
+        queue.add(tree);
+        while(!queue.isEmpty()){
+            Node temp = queue.remove(0);
+            res = res + "("+(temp.v-temp.u)+"/"+(temp.v+temp.u)+", "+temp.u+"/"+temp.v+"), ";
+            if(temp.getLeft() != null) {
+                queue.add(temp.getLeft());
+                queue.add(temp.getMid());
+                queue.add(temp.getRight());
+            }
+
+        }
+
+    }
 }

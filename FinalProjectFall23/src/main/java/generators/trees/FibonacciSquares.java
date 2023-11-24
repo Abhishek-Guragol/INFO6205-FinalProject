@@ -54,6 +54,7 @@ public class FibonacciSquares {
         return newNode;
     }
 
+    // Printing out the nodes of the tree in order
     public void printTree(Node node){
 
         if (node == null) return;
@@ -73,7 +74,9 @@ public class FibonacciSquares {
         printTree(this.treeRoot);
     }
 
+    // Printing out the nodes of the tree in a breadth first search approach 
     public String treeBFS(){
+        res = "";
         List<Node> queue = new ArrayList<>();
         queue.add(treeRoot);
         while(!queue.isEmpty()){
@@ -86,7 +89,6 @@ public class FibonacciSquares {
             }
 
         }
-        System.out.println(res);
         return res;
     }
 }

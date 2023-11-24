@@ -6,6 +6,7 @@ public class Node {
 //    Value of that particular node
     public int v,u;
     public int level;
+    public int pos;
 //    Three nodes representing the three branches of the tree
     public Node left;
     public Node mid;
@@ -49,7 +50,7 @@ public class Node {
 
     public String getVal() {
 
-        return ("["+(this.v-this.u)+","+this.u+","+this.v+","+(this.v+this.u)+"], ");
+        return "["+(this.v-this.u)+","+this.u+","+this.v+","+(this.v+this.u)+"], ";
     }
 
     public void setVal(int v, int u) {
