@@ -31,5 +31,35 @@ public class Traversal {
 
         return res;
     }
+
+    public String pythagoreanTraversal(List<String> path){
+        if (path == null || path.size() <= 0 || path.size() > height) return "";
+
+        Node curNode = root;
+        String res = "";
+        for(String i : path){
+            if(i == "l") curNode = curNode.left;
+            else if (i == "m") curNode = curNode.mid;
+            else if (i == "r") curNode = curNode.right;
+        }
+
+        res = "["+((curNode.v*curNode.v )- (curNode.u*curNode.u))+","+(2*curNode.u*curNode.v)+","+(curNode.u*(curNode.v+curNode.u)+curNode.v*(curNode.v-curNode.u))+"]";
+
+        return res;
+    }
     
+    public String rationalTraversal(List<String> path){
+        if (path == null || path.size() <= 0 || path.size() > height) return "";
+
+        Node curNode = root;
+        String res = "";
+        for(String i : path){
+            if(i == "l") curNode = curNode.left;
+            else if (i == "m") curNode = curNode.mid;
+            else if (i == "r") curNode = curNode.right;
+        }
+
+        res = "("+(curNode.v-curNode.u)+"/"+(curNode.v+curNode.u)+", "+curNode.u+"/"+curNode.v+")";
+        return res;
+    }
 }
