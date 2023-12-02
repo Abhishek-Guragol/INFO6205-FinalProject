@@ -45,7 +45,15 @@ public class RationalUI {
         List<UiNode> queue = new ArrayList<>();
         queue.add(new UiNode(root, n));
 
-       int x = 0;
+       List<Integer> x = new ArrayList<>();
+       x.add(0);
+       x.add(250);
+       x.add(500);
+       x.add(750);
+        x.add(1000);
+                x.add(1250);
+
+
        int y = 0;
         while (!queue.isEmpty()) {
             UiNode temp = queue.remove(0);
@@ -60,20 +68,11 @@ public class RationalUI {
             label2.setBorder(br);
             label2.setBackground(Color.PINK);
             label2.setOpaque(true);
-            label2.setBounds(x+temp.n.level*95,y+(temp.val+temp.n.level)*95,105,30);
+            label2.setBounds(x.get(5-temp.n.level),y+(temp.val+temp.n.level)*95,105,30);
             frame.add(label2);
             
         }
 
-    }
-
-    public static List<Integer> genNodeTriple(Node n){
-        List<Integer> triples = new ArrayList<>();
-
-        triples.add( (n.v*n.v )- (n.u*n.u)); //V^2-U^2
-        triples.add( 2*n.u*n.v);
-        triples.add(  n.u*(n.v+n.u)+n.v*(n.v-n.u));  //(U*(v+u))+(V*(V-U))
-        return triples;
     }
 
     public static class UiNode {

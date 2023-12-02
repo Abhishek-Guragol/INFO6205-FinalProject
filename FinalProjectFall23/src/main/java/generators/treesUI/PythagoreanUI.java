@@ -49,9 +49,12 @@ public class PythagoreanUI {
         Border br = BorderFactory.createLineBorder(Color.BLACK);
         List<UiNode> queue = new ArrayList<>();
         queue.add(new UiNode(root, n));
-
-       int x = 0;
-       int y = 0;
+        List<Integer> x = new ArrayList<>();
+        x.add(0);
+        x.add(250);
+        x.add(500);
+        x.add(750);
+        int y = 0;
         while (!queue.isEmpty()) {
             UiNode temp = queue.remove(0);
             String t = "{"+(String.join(",",genNodeTriple(temp.n).
@@ -68,7 +71,7 @@ public class PythagoreanUI {
             label2.setBorder(br);
             label2.setBackground(Color.PINK);
             label2.setOpaque(true);
-            label2.setBounds(x+temp.n.level*95,y+(temp.val+temp.n.level)*95,105,30);
+            label2.setBounds(x.get(3-temp.n.level),y+(temp.val+temp.n.level)*95,105,30);
             frame.add(label2);
             
         }
