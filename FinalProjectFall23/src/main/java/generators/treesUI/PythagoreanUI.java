@@ -1,16 +1,16 @@
 package generators.treesUI;
 
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.swing.BorderFactory;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 
 import generators.trees.FibonacciSquares;
 import utils.Node;
@@ -24,80 +24,56 @@ public class PythagoreanUI {
     
         int n = Integer.parseInt(JOptionPane.showInputDialog("Enter number of levels"));
         Node tree = fib.generateSquares(n);
-        // JOptionPane.showMessageDialog(null, fib.treeBFS());
-        JFrame frame = initialiseScreen();
-        
-        
-        renderTress(n, tree, frame);
-        frame.setVisible(true);//Make it visible on screen
+        display(tree);
+
     }
 
-    public static JFrame initialiseScreen(){
 
-        JFrame frame = new JFrame("Pyhtagorean Tree"); //Create a frame
-        
-        frame.setSize(2000, 2000);//Set Dimension
-        frame.setLayout(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public static DefaultMutableTreeNode recJtree(Node n){
 
-        return frame;
-    }
-
-    public static void renderTress(int n, Node root, JFrame frame){
-
-
-        Border br = BorderFactory.createLineBorder(Color.BLACK);
-        List<UiNode> queue = new ArrayList<>();
-        queue.add(new UiNode(root, n));
-        List<Integer> x = new ArrayList<>();
-        x.add(0);
-        x.add(250);
-        x.add(500);
-        x.add(750);
-        int y = 0;
-        while (!queue.isEmpty()) {
-            UiNode temp = queue.remove(0);
-            String t = "{"+(String.join(",",genNodeTriple(temp.n).
-                                                    stream().
-                                                    map(String::valueOf).
-                                                    collect(Collectors.joining(","))))+"}, ";
-            if(temp.n.getLeft() != null) {
-                queue.add(new UiNode(temp.n.getLeft(),1));
-                queue.add(new UiNode(temp.n.getMid(),2));
-                queue.add(new UiNode(temp.n.getRight(),3));
-            }
-            JLabel label2 = new JLabel();
-            label2.setText(t);
-            label2.setBorder(br);
-            label2.setBackground(Color.PINK);
-            label2.setOpaque(true);
-            label2.setBounds(x.get(3-temp.n.level),y+(temp.val+temp.n.level)*95,105,30);
-            frame.add(label2);
-            
+        DefaultMutableTreeNode t;
+        if(n.left == null) return(new DefaultMutableTreeNode(n.getPythagorrean()));
+        else{
+            t = new DefaultMutableTreeNode(n.getPythagorrean());
+            t.add(recJtree(n.left));
+            t.add(recJtree(n.mid));
+            t.add(recJtree(n.right));
+            return(t);
         }
+    }
+
+    public static void display(Node root){
+
+        JFrame frame = new JFrame( 
+            "Pythagorean Triples Tree");
+
+            DefaultMutableTreeNode uiroot = recJtree(root);
+            DefaultTreeModel model = new DefaultTreeModel(uiroot);
+            JTree tree = new JTree(model);
+            DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
+            Image image = Toolkit.getDefaultToolkit().getImage("/logo.png");
+            ImageIcon icon = new ImageIcon(image);
+            renderer.setClosedIcon(icon);
+            renderer.setOpenIcon(icon);
+            renderer.setLeafIcon(icon);
+            expandAllNodes(tree, 0, tree.getRowCount());
+            frame.add(new JScrollPane(tree));
+            frame.setSize(6000, 4000); 
+            frame.setDefaultCloseOperation( 
+            JFrame.EXIT_ON_CLOSE); 
+            frame.setVisible(true); 
+        
 
     }
 
-    public static List<Integer> genNodeTriple(Node n){
-        List<Integer> triples = new ArrayList<>();
-
-        triples.add( (n.v*n.v )- (n.u*n.u)); //V^2-U^2
-        triples.add( 2*n.u*n.v);
-        triples.add(  n.u*(n.v+n.u)+n.v*(n.v-n.u));  //(U*(v+u))+(V*(V-U))
-        return triples;
-    }
-
-    public static class UiNode {
+    private static void expandAllNodes(JTree tree, int startingIndex, int rowCount){
+        for(int i=startingIndex;i<rowCount;++i){
+            tree.expandRow(i);
+        }
     
-        public UiNode(Node n, int v){
-            this.n = n;
-            this.val = v;
-        
-            
+        if(tree.getRowCount()!=rowCount){
+            expandAllNodes(tree, rowCount, tree.getRowCount());
         }
-        public Node n;
-        public int val;
-        
     }
     
 }

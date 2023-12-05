@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Node {
 
@@ -52,6 +55,15 @@ public class Node {
 
         return "["+(this.v-this.u)+","+this.u+","+this.v+","+(this.v+this.u)+"], ";
     }
+
+    public String getRational(){
+        return "("+(this.v-this.u)+"/"+(this.v+this.u)+", "+this.u+"/"+this.v+")";
+    }
+
+    public String getPythagorrean(){
+        return "{"+((this.v*this.v)-(this.u*this.u))+","+( 2*this.u*this.v)+","+(  this.u*(this.v+this.u)+this.v*(this.v-this.u))+"}";
+    }
+
 
     public void setVal(int v, int u) {
         this.v = v;
