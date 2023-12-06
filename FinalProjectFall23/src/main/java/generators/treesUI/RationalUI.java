@@ -3,7 +3,6 @@ package generators.treesUI;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -59,6 +58,7 @@ public class RationalUI {
             frame.setDefaultCloseOperation( 
             JFrame.EXIT_ON_CLOSE); 
             frame.setVisible(true); 
+            
         
 
     }
@@ -72,4 +72,6 @@ public class RationalUI {
             expandAllNodes(tree, rowCount, tree.getRowCount());
         }
     }
+
+    
 }

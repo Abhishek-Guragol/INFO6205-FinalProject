@@ -62,9 +62,10 @@ public class PythagoreanUI {
             frame.setDefaultCloseOperation( 
             JFrame.EXIT_ON_CLOSE); 
             frame.setVisible(true); 
-        
-
+  
     }
+
+    
 
     private static void expandAllNodes(JTree tree, int startingIndex, int rowCount){
         for(int i=startingIndex;i<rowCount;++i){

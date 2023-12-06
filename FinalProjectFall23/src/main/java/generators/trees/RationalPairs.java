@@ -22,7 +22,7 @@ public class RationalPairs {
 
     public void printPairs(Node tree){
         if (tree == null) return ;
-        res = res + "("+(tree.v-tree.u)+"/"+(tree.v+tree.u)+","+tree.u+"/"+tree.v+")";
+        res = res + tree.getRationalLazy();
         
 
         if(tree.getLeft() == null) return ;
@@ -39,7 +39,7 @@ public class RationalPairs {
         queue.add(tree);
         while(!queue.isEmpty()){
             Node temp = queue.remove(0);
-            res = res + "("+(temp.v-temp.u)+"/"+(temp.v+temp.u)+", "+temp.u+"/"+temp.v+"), ";
+            res = res + temp.getRationalLazy()+", " ;
             if(temp.getLeft() != null) {
                 queue.add(temp.getLeft());
                 queue.add(temp.getMid());

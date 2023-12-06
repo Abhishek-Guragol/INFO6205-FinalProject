@@ -1,8 +1,7 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Supplier;
+
 
 public class Node {
 
@@ -14,7 +13,12 @@ public class Node {
     public Node left;
     public Node mid;
     public Node right;
-
+// Supplier for lazy printing of node
+    private Supplier<String> rSupplier;
+    private Supplier<String> pSupplier;
+// Functional interfaces for lazy evaluation
+    private Supplier<Double> aSupplier;
+    private Supplier<Double> bSupplier;
 
     public void setNode(int v,int u, Node left, Node mid, Node right, int l){
         setVal(v,u);
@@ -72,5 +76,39 @@ public class Node {
 
     public void printVal(){
         System.out.print(this.getVal());
+    }
+
+
+    // Functional interfaces for lazy evaluation
+    public Node() {
+        
+
+        // Initialize lazy printing of rtional and pythagorean
+        rSupplier = () -> "("+(this.v - this.u)+"/ "+(this.v + this.u)+","+u +"/"+v+")";
+        pSupplier = () -> "{"+((this.v*this.v )- (this.u*this.u))+","+(2*this.u*this.v)+","+(this.u*(this.v+this.u)+this.v*(this.v-this.u))+"}";
+    
+        // Initialize lazy evaluation for a and b of rational
+        aSupplier = () -> (v - u) / (double) (v + u);
+        bSupplier = () -> u / (double) v;
+    }
+
+    // Getter for lazy-printed rational
+    public String getRationalLazy() {
+        return rSupplier.get();
+    }
+
+    // Getter for lazy-evaluated rational
+    public double getRationalALazy() {
+        return aSupplier.get();
+    }
+
+    // Getter for lazy-evaluated rational
+    public double getRationalBALazy() {
+        return bSupplier.get();
+    }
+
+    // Getter for lazy-printed pythagorean
+    public String getPythagoreanLazy() {
+        return pSupplier.get();
     }
 }
