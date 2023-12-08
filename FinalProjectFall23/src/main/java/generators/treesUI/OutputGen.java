@@ -1,5 +1,7 @@
 package generators.treesUI;
 
+import java.util.Stack;
+
 import generators.trees.FibonacciSquares;
 import generators.trees.PathSearcher;
 import generators.trees.PythagoreanTriples;
@@ -22,8 +24,17 @@ public class OutputGen {
         RationalPairs p = new RationalPairs();
         System.out.println(" Rational Pairs:\n"+p.generatePairs(6));
 
+        // Brute force method
         PathSearcher searcher = new PathSearcher();
-        System.out.println(searcher.searchPath(test.getTreeRoot(), 2, 3, 4, 5));
+        System.out.println(searcher.searchPath(test.getTreeRoot(), 2, 3, 1, 3));
+
+        // Using the algorithm
+        Stack<Character> path = PathAlgorithm.calculatePath(4, 7);
+
+        // Expected output: lr
+        while (!path.isEmpty()) {
+            System.out.print(path.pop());
+        }
     }
     
 }
